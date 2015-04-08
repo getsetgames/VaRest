@@ -70,6 +70,22 @@ bool UVaRestJsonObject::DecodeJson(const FString& JsonString)
 	return false;
 }
 
+void UVaRestJsonObject::PostLoad()
+{
+	Super::PostLoad();
+	
+	if (SourceJsonString.Len() > 0)
+	{
+		DecodeJson(SourceJsonString);
+	}
+}
+
+void UVaRestJsonObject::PreSave()
+{
+	Super::PreSave();
+	
+	SourceJsonString = EncodeJson();
+}
 
 //////////////////////////////////////////////////////////////////////////
 // FJsonObject API

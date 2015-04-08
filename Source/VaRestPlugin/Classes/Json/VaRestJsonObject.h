@@ -40,6 +40,10 @@ class UVaRestJsonObject : public UObject
 	/** Construct Json object from string */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Json")
 	bool DecodeJson(const FString& JsonString);
+	
+	/** UObject serialization overrides */
+	virtual void PostLoad() override;
+	virtual void PreSave() override;
 
 
 	//////////////////////////////////////////////////////////////////////////
@@ -152,5 +156,8 @@ class UVaRestJsonObject : public UObject
 private:
 	/** Internal JSON data */
 	TSharedPtr<FJsonObject> JsonObj;
-
+	
+	/** Internal JSON source string - used for serialization */
+	UPROPERTY()
+	FString SourceJsonString;
 };

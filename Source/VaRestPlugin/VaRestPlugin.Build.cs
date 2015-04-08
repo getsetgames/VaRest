@@ -34,6 +34,14 @@ namespace UnrealBuildTool.Rules
                     "Json"
 					// ... add other public dependencies that you statically link with here ...
 				});
+				
+			if (UEBuildConfiguration.bBuildEditor)
+			{
+				PublicDependencyModuleNames.Add("UnrealEd");
+				PublicDependencyModuleNames.Add("AssetTools");
+				PublicDependencyModuleNames.Add("AssetRegistry");
+			}
+
 		}
 	}
 }

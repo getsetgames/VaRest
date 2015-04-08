@@ -5,6 +5,11 @@
 #include "CoreUObject.h"
 #include "Engine.h"
 
+#if WITH_EDITOR
+#include "UnrealEd.h"
+#include "AssetToolsModule.h"
+#endif
+
 #include "Delegate.h"
 #include "Http.h"
 #include "Map.h"
