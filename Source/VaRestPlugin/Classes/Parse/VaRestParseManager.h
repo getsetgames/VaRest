@@ -22,7 +22,7 @@ class UVaRestParseManager : public UVaRestRequestJSON
 
 	/** Set Parse authenication data */
 	UFUNCTION(BlueprintCallable, Category = "VaRest|Parse")
-	static void SetParseAuthData(FString AppId, FString ApiKey);
+	static void SetParseAuthData(FString ServerURL, FString AppId, FString ApiKey);
 
 
 	//////////////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@
 
 #include "VaRestPluginPrivatePCH.h"
 
-FString UVaRestParseManager::ParseURL(TEXT("https://api.parse.com/1/"));
+FString UVaRestParseManager::ParseURL(TEXT(""));
 FString UVaRestParseManager::ParseAppId(TEXT(""));
 FString UVaRestParseManager::ParseApiKey(TEXT(""));
 
@@ -58,8 +58,9 @@ void UVaRestParseManager::ProcessParseURL(
 	ProcessRequest(HttpRequest);
 }
 
-void UVaRestParseManager::SetParseAuthData(FString AppId, FString ApiKey)
+void UVaRestParseManager::SetParseAuthData(FString ServerURL, FString AppId, FString ApiKey)
 {
+	ParseURL = ServerURL;
 	ParseAppId = AppId;
 	ParseApiKey = ApiKey;
 }
