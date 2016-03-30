@@ -197,6 +197,8 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 
 		// Apply params to the url
 		HttpRequest->SetURL(HttpRequest->GetURL() + UVaRestRequestJSON::PercentEncode(UrlParams));
+		
+		UE_LOG(LogVaRest, Log, TEXT("Request %s %s %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL(), *UVaRestRequestJSON::PercentEncode(UrlParams));
 
 		break;
 	}
@@ -212,6 +214,8 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 
 		// Set Json content
 		HttpRequest->SetContentAsString(OutputString);
+
+		UE_LOG(LogVaRest, Log, TEXT("Request %s %s %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL(), *OutputString);
 
 		break;
 	}
