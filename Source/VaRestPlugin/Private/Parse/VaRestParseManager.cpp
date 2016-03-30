@@ -96,8 +96,13 @@ UVaRestJsonObject* UVaRestParseManager::ConstructDateObject(const FDateTime& Dat
 
 bool UVaRestParseManager::DateFromObject(UVaRestJsonObject* JsonObject, FDateTime& Result)
 {
-	FString IsoString = JsonObject->GetStringField(TEXT("iso"));
-	return FDateTime::ParseIso8601(*IsoString, Result);
+	if (JsonObject)
+	{
+		FString IsoString = JsonObject->GetStringField(TEXT("iso"));
+		return FDateTime::ParseIso8601(*IsoString, Result);
+	}
+	
+	return false;
 }
 
 UVaRestJsonObject* UVaRestParseManager::ConstructDeleteOperation()
