@@ -189,16 +189,16 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 			if (!Key.IsEmpty() && !Value.IsEmpty())
 			{
 				UrlParams += ParamIdx == 0 ? "?" : "&";
-				UrlParams += Key + "=" + Value;
+				UrlParams += UVaRestRequestJSON::PercentEncode(Key) + "=" + UVaRestRequestJSON::PercentEncode(Value);
 			}
 
 			ParamIdx++;
 		}
 
 		// Apply params to the url
-		HttpRequest->SetURL(HttpRequest->GetURL() + UVaRestRequestJSON::PercentEncode(UrlParams));
+		HttpRequest->SetURL(HttpRequest->GetURL() + UrlParams);
 		
-		UE_LOG(LogVaRest, Log, TEXT("Request %s %s %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL(), *UVaRestRequestJSON::PercentEncode(UrlParams));
+		UE_LOG(LogVaRest, Log, TEXT("Request %s %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL());
 
 		break;
 	}
