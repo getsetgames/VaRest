@@ -2,6 +2,11 @@
 
 #pragma once
 
+#include "Delegate.h"
+#include "Http.h"
+#include "Map.h"
+#include "Json.h"
+
 #include "VaRestRequestJSON.generated.h"
 
 /** Verb (GET, PUT, POST) used by the request */

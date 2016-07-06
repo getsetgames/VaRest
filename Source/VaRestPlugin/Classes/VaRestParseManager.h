@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "VaRestPluginClasses.h"
 #include "VaRestParseManager.generated.h"
 
 /**
