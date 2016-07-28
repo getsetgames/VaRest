@@ -170,6 +170,8 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 		break;
 	}
 
+	FString DataString = FString(TEXT("none"));
+	
 	// Set content-type
 	switch (RequestContentType)
 	{
@@ -198,8 +200,6 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 		// Apply params to the url
 		HttpRequest->SetURL(HttpRequest->GetURL() + UrlParams);
 		
-		UE_LOG(LogVaRest, Log, TEXT("Request %s %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL());
-
 		break;
 	}
 
@@ -214,8 +214,8 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 
 		// Set Json content
 		HttpRequest->SetContentAsString(OutputString);
-
-		UE_LOG(LogVaRest, Log, TEXT("Request %s %s %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL(), *OutputString);
+		
+		DataString = OutputString;
 
 		break;
 	}
@@ -229,6 +229,30 @@ void UVaRestRequestJSON::ProcessRequest(TSharedRef<IHttpRequest> HttpRequest)
 	{
 		HttpRequest->SetHeader(It.Key(), It.Value());
 	}
+	
+	TArray<FString> Headers = HttpRequest->GetAllHeaders();
+	
+	FString HeaderString = TEXT("{");
+	
+	for (auto HeaderItr(Headers.CreateIterator()); HeaderItr; HeaderItr++)
+	{
+		FString Header = (*HeaderItr);
+		
+		Header = Header.Replace(TEXT(": "), TEXT("\":\""));
+		Header.Append(TEXT("\","));
+		HeaderString.Append(TEXT("\n\t\""));
+		HeaderString.Append(Header);
+	}
+	
+	if (Headers.Num() > 0)
+	{
+		HeaderString.RemoveFromEnd(TEXT(","));
+		HeaderString.Append(TEXT("\n"));
+	}
+	
+	HeaderString.Append(TEXT("}"));
+	
+	UE_LOG(LogVaRest, Log, TEXT("Request %s %s\nRequest Headers: %s\nRequest Data: %s"), *HttpRequest->GetVerb(), *HttpRequest->GetURL(), *HeaderString, *DataString);
 	
 	// Bind event
 	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UVaRestRequestJSON::OnProcessRequestComplete);
