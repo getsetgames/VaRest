@@ -1,5 +1,6 @@
 // Copyright 2014 Vladimir Alyamkin. All Rights Reserved.
 
+#include "VaRestParseManager.h"
 #include "VaRestPluginPrivatePCH.h"
 
 FString UVaRestParseManager::ParseURL(TEXT(""));
