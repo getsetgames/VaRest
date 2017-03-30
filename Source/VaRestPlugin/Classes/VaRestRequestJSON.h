@@ -5,7 +5,6 @@
 #include "Delegate.h"
 #include "Http.h"
 #include "Map.h"
-#include "Json.h"
 
 #include "VaRestRequestJSON.generated.h"
 
