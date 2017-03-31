@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "UObject/Object.h"
+#include "UObject/ScriptMacros.h"
 #include "Delegate.h"
 #include "Http.h"
 #include "Map.h"

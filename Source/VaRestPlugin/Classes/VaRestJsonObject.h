@@ -3,6 +3,10 @@
 
 #pragma once
 
+#include "UObject/Object.h"
+#include "UObject/ScriptMacros.h"
+#include "Serialization/JsonSerializer.h"
+#include "Serialization/JsonSerializerMacros.h"
 #include "VaRestJsonObject.generated.h"
 
 class UVaRestJsonValue;
